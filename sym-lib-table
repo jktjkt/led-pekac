@@ -1,0 +1,8 @@
+(sym_lib_table
+  (lib (name P78E05-1000)(type Legacy)(uri ${KIPRJMOD}/pekac-library/P78E05-1000.lib)(options "")(descr ""))
+  (lib (name TB002-500-02BE)(type Legacy)(uri ${KIPRJMOD}/pekac-library/TB002-500-02BE.lib)(options "")(descr ""))
+  (lib (name TC1427COA)(type Legacy)(uri ${KIPRJMOD}/pekac-library/TC1427COA.lib)(options "")(descr ""))
+  (lib (name MAX6956AAX+)(type Legacy)(uri ${KIPRJMOD}/pekac-library/MAX6956AAX+.lib)(options "")(descr ""))
+  (lib (name TB002-500-04BE)(type Legacy)(uri ${KIPRJMOD}/pekac-library/TB002-500-04BE.lib)(options "")(descr ""))
+  (lib (name Bourns-PEC12R)(type Legacy)(uri ${KIPRJMOD}/pekac-library/Bourns-PEC12R.lib)(options "")(descr ""))
+)

@@ -1,0 +1,52 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Bourns PEC12R-3220F-S0024
+#
+DEF PEC12R-3220F-S0024 ENC 0 40 Y Y 1 L N
+F0 "ENC" 0 200 50 H V L CNN 
+F1 "PEC12R-3220F-S0024" 0 300 50 H V L CNN 
+F2 "Bourns-PEC12R-3220F-S0024-*" 0 400 50 H I L CNN 
+F3 "https://www.bourns.com/docs/Product-Datasheets/PEC12R.pdf" 0 500 50 H I L CNN 
+F4 "No" 0 600 50 H I L CNN "automotive"
+F5 "Enc" 0 700 50 H I L CNN "category"
+F6 "10mA" 0 800 50 H I L CNN "current rating"
+F7 "Yes" 0 900 50 H I L CNN "detent"
+F8 "Electromechanical" 0 1000 50 H I L CNN "device class L1"
+F9 "Switches" 0 1100 50 H I L CNN "device class L2"
+F10 "Encoders" 0 1200 50 H I L CNN "device class L3"
+F11 "ROTARY ENCODER MECHANICAL 24PPR" 0 1300 50 H I L CNN "digikey description"
+F12 "PEC12R-3220F-S0024-ND" 0 1400 50 H I L CNN "digikey part number"
+F13 "Incremental" 0 1500 50 H I L CNN "encoder type"
+F14 "20.5mm" 0 1600 50 H I L CNN "height"
+F15 "Yes" 0 1700 50 H I L CNN "lead free"
+F16 "b958e21bc03e5395" 0 1800 50 H I L CNN "library id"
+F17 "Bourns" 0 1900 50 H I L CNN "manufacturer"
+F18 "Mechanical Encoder Rotary Incremental Flat 2.83oz.in Straight Quadrature Digital Square Wave 24PPR Through Hole PC Pin" 0 2000 50 H I L CNN "mouser description"
+F19 "652-PEC12R3220FS0024" 0 2100 50 H I L CNN "mouser part number"
+F20 "SW_ENC_12MM4_13MM4" 0 2200 50 H I L CNN "package"
+F21 "24" 0 2300 50 H I L CNN "pulses per rev"
+F22 "Yes" 0 2400 50 H I L CNN "rohs"
+F23 "+70°C" 0 2500 50 H I L CNN "temperature range high"
+F24 "-30°C" 0 2600 50 H I L CNN "temperature range low"
+F25 "5V" 0 2700 50 H I L CNN "voltage rating DC"
+DRAW
+X 1 1 100 0 100 R 40 0 1 1 P 
+X 2 2 100 -400 100 R 40 0 1 1 P 
+X MNT_1 3 1300 0 100 L 40 40 1 1 P 
+X MNT_2 4 1300 -100 100 L 40 40 1 1 P 
+X CHANNEL_A A 100 -600 100 R 40 40 1 1 P 
+X CHANNEL_B B 100 -1000 100 R 40 40 1 1 P 
+X COMMON C 100 -800 100 R 40 40 1 1 P 
+C 300 -130 20 1 1 0 N
+C 300 -270 20 1 1 0 N
+P 2 1 1 0 310 -150 370 -250 N
+P 2 1 1 0 200 0 300 0 N
+P 2 1 1 0 300 0 300 -100 N
+P 2 1 1 0 300 -300 300 -400 N
+P 2 1 1 0 300 -400 200 -400 N
+S 1200 100 200 -1100 1 1 0 f
+ENDDRAW
+ENDDEF
+#
+# End Library

@@ -1,0 +1,7 @@
+[Unit]
+Description=LED wheel control
+
+[Service]
+Type=simple
+ExecStart=/root/pekac.sh
+Restart=always

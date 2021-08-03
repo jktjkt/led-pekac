@@ -1835,68 +1835,20 @@ F 3 "" H 8900 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R10
-U 1 1 60F2D46C
-P 10500 5100
-F 0 "R10" H 10559 5146 50  0000 L CNN
-F 1 "12.1k 0.1%" H 10559 5055 50  0000 L CNN
-F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" H 10500 5100 50  0001 C CNN
-F 3 "~" H 10500 5100 50  0001 C CNN
-	1    10500 5100
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector_Generic:Conn_01x04 J1
 U 1 1 60F3F25D
-P 10800 5300
-F 0 "J1" H 10880 5292 50  0000 L CNN
-F 1 "Conn_01x04" H 10880 5201 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 10800 5300 50  0001 C CNN
-F 3 "~" H 10800 5300 50  0001 C CNN
-	1    10800 5300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_Small R9
-U 1 1 60F4848C
-P 10250 5100
-F 0 "R9" H 10309 5146 50  0000 L CNN
-F 1 "12.1k 0.1%" H 10309 5055 50  0000 L CNN
-F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" H 10250 5100 50  0001 C CNN
-F 3 "~" H 10250 5100 50  0001 C CNN
-	1    10250 5100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR060
-U 1 1 60F4AD25
-P 10250 5000
-F 0 "#PWR060" H 10250 4850 50  0001 C CNN
-F 1 "+3.3V" H 10265 5173 50  0000 C CNN
-F 2 "" H 10250 5000 50  0001 C CNN
-F 3 "" H 10250 5000 50  0001 C CNN
-	1    10250 5000
+P 10800 5400
+F 0 "J1" H 10880 5392 50  0000 L CNN
+F 1 "Conn_01x04" H 10880 5301 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 10800 5400 50  0001 C CNN
+F 3 "~" H 10800 5400 50  0001 C CNN
+	1    10800 5400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10250 5000 10500 5000
-Connection ~ 10250 5000
-Wire Wire Line
-	10500 5200 10600 5200
-Wire Wire Line
-	10250 5200 10250 5400
-Wire Wire Line
-	10250 5400 10600 5400
-Wire Wire Line
-	9850 5300 10600 5300
-Wire Wire Line
-	9850 5500 10600 5500
+	9850 5400 10000 5400
 Text Label 9850 5300 0    50   ~ 0
 NTC1_sense
-Text Label 10500 5200 0    50   ~ 0
-NTC1_bias
-Text Label 10250 5400 0    50   ~ 0
-NTC2_bias
 Text Label 9850 5500 0    50   ~ 0
 NTC2_sense
 $Comp
@@ -2187,10 +2139,73 @@ Wire Wire Line
 	10000 6050 10300 6050
 Connection ~ 10300 6050
 Wire Wire Line
-	9850 5400 10000 5400
-Wire Wire Line
 	10000 5400 10000 5600
 Connection ~ 10000 5600
+Text Label 10000 6050 2    50   ~ 0
+adc_mid
+$Comp
+L power:GND #PWR?
+U 1 1 610A9AA4
+P 10600 5700
+F 0 "#PWR?" H 10600 5450 50  0001 C CNN
+F 1 "GND" H 10605 5527 50  0000 C CNN
+F 2 "" H 10600 5700 50  0001 C CNN
+F 3 "" H 10600 5700 50  0001 C CNN
+	1    10600 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9850 5300 10300 5300
+Connection ~ 10300 4750
+Wire Wire Line
+	10300 4750 10450 4750
+$Comp
+L power:+3.3V #PWR060
+U 1 1 60F4AD25
+P 10300 4750
+F 0 "#PWR060" H 10300 4600 50  0001 C CNN
+F 1 "+3.3V" H 10315 4923 50  0000 C CNN
+F 2 "" H 10300 4750 50  0001 C CNN
+F 3 "" H 10300 4750 50  0001 C CNN
+	1    10300 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R9
+U 1 1 60F4848C
+P 10300 4850
+F 0 "R9" H 10359 4896 50  0000 L CNN
+F 1 "12.1k 0.1%" H 10359 4805 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" H 10300 4850 50  0001 C CNN
+F 3 "~" H 10300 4850 50  0001 C CNN
+	1    10300 4850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R10
+U 1 1 60F2D46C
+P 10450 4850
+F 0 "R10" H 10509 4896 50  0000 L CNN
+F 1 "12.1k 0.1%" H 10509 4805 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" H 10450 4850 50  0001 C CNN
+F 3 "~" H 10450 4850 50  0001 C CNN
+	1    10450 4850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10300 4950 10300 5300
+Connection ~ 10300 5300
+Wire Wire Line
+	10300 5300 10600 5300
+Wire Wire Line
+	10600 5700 10600 5600
+Connection ~ 10600 5600
+Wire Wire Line
+	10600 5400 10600 5600
+Wire Wire Line
+	9850 5500 10450 5500
+Wire Wire Line
+	10450 4950 10450 5500
 Wire Bus Line
 	3350 5550 3350 7450
 Wire Bus Line
@@ -2203,6 +2218,7 @@ Wire Bus Line
 	5800 5100 5800 7450
 Wire Bus Line
 	3100 5550 3100 7450
-Text Label 10000 6050 2    50   ~ 0
-adc_mid
+Connection ~ 10450 5500
+Wire Wire Line
+	10450 5500 10600 5500
 $EndSCHEMATC

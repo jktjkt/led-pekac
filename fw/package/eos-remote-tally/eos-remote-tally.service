@@ -7,6 +7,7 @@ Restart=always
 RestartSec=1
 EnvironmentFile=/etc/tally.conf
 ExecStartPre=/sbin/i2ctransfer -y 1 w2@0x0c 0x17 0xff w2@0x0c 0x00 0x40 w4@0x0c 0x11 0x88 0x88 0x88
+ExecStartPre=/bin/sh -c 'echo 1 > /sys/devices/platform/soc/20980000.usb/buspower'
 ExecStart=/usr/bin/python3 /usr/bin/eos-remote-tally ${TALLY_SERVER}
 
 [Install]

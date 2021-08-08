@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_HRZTV_PATH/package/eos-remote-tally/Config.in"

@@ -1,0 +1,12 @@
+[Unit]
+Description=Tally light
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+EnvironmentFile=/etc/tally.conf
+ExecStart=/usr/bin/python3 /usr/bin/eos-remote-tally ${TALLY_SERVER}
+
+[Install]
+WantedBy=multi-user.target

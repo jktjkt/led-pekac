@@ -1,0 +1,46 @@
+From e64ff175a1dc36cbae639aa8ccaba91188bd789c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jan=20Kundr=C3=A1t?= <jan.kundrat@cesnet.cz>
+Date: Sat, 31 Jul 2021 00:01:17 +0200
+Subject: [PATCH 2/3] leds: lp50xx: KConfig: fix dependencies
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+I just lost a few hours of debugging why the heck my sysfs nodes were
+not created even though devm_led_classdev_multicolor_register_ext() was
+returning 0. It turned out that I was missing support for the multicolor
+LED device class. No errors were reported, neither during the build, nor
+at runtime -- but the DTS configuration of the connected LEDs was
+silently ignored.
+
+The driver also really needs DTS -- probe fails if there are no children
+in the DT, so the direct binding from userspace probably doesn't work.
+That's interesting because commit
+ea1ff99c9d235b8a54571d4292c71fce60993117 suggests that a direct bind was
+supposed to work.
+
+Signed-off-by: Jan Kundrát <jan.kundrat@cesnet.cz>
+---
+ drivers/leds/Kconfig | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
+index a5101dfa2713..43f585f601e2 100644
+--- a/drivers/leds/Kconfig
++++ b/drivers/leds/Kconfig
+@@ -398,8 +398,10 @@ config LEDS_LP3952
+ 
+ config LEDS_LP50XX
+ 	tristate "LED Support for TI LP5036/30/24/18/12/09 LED driver chip"
+-	depends on LEDS_CLASS && REGMAP_I2C
+-	depends on LEDS_CLASS_MULTICOLOR || !LEDS_CLASS_MULTICOLOR
++	depends on LEDS_CLASS
++	depends on LEDS_CLASS_MULTICOLOR
++	depends on REGMAP_I2C
++	depends on OF
+ 	help
+ 	  If you say yes here you get support for the Texas Instruments
+ 	  LP5036, LP5030, LP5024, LP5018, LP5012 and LP5009 LED driver.
+-- 
+2.32.0
+

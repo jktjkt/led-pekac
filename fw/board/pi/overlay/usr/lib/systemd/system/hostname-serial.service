@@ -1,0 +1,4 @@
+[Unit]
+After=local-fs.target
+[Service]
+ExecStart=/bin/sh -c 'hostnamectl hostname --transient rpi-$(cat /sys/firmware/devicetree/base/serial-number)'

@@ -1,0 +1,15 @@
+config BR2_PACKAGE_EOS_REMOTE_TALLY
+	bool "eos-remote-tally"
+	select BR2_PACKAGE_PYTHON_ASYNCIO_MQTT
+	select BR2_PACKAGE_LIBGPHOTO2
+	select BR2_PACKAGE_PYTHON_GPHOTO2
+	select BR2_PACKAGE_PYTHON_SMBUS_CFFI
+	help
+	  Tally LED light and remote camera control over MQTT
+
+if BR2_PACKAGE_EOS_REMOTE_TALLY
+config EOS_REMOTE_TALLY_MQTT_SERVER
+	string "server address"
+	help
+	  Address of the MQTT server that the cameras should connect to
+endif

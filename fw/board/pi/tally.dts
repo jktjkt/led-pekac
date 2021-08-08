@@ -1,0 +1,98 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/leds/common.h>
+
+/ {
+        compatible = "brcm,bcm2835";
+	fragment@0 {
+                target = <&i2c_arm>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+			clock-frequency = <400000>;
+
+			led-controller@0c {
+				compatible = "ti,lp5009";
+				reg = <0x0c>;
+				#address-cells = <1>;
+				#size-cells = <0>;
+				status = "disabled";
+
+				multi-led@1 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <1>;
+					label = "tally:1";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+				multi-led@2 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <2>;
+					label = "tally:2";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+				multi-led@3 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <3>;
+					label = "tally:3";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+				multi-led@4 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <4>;
+					label = "tally:4";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+				multi-led@5 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <5>;
+					label = "tally:5";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+				multi-led@6 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					reg = <6>;
+					label = "tally:6";
+					led {
+						color = <LED_COLOR_ID_RED>;
+					};
+				};
+
+				multi-led@7 {
+					#address-cells = <1>;
+					#size-cells = <2>;
+					reg = <7 8 9>;
+					color = <LED_COLOR_ID_RGB>;
+					label = "preview";
+
+					led@7 {
+						color = <LED_COLOR_ID_RED>;
+					};
+					led@8 {
+						color = <LED_COLOR_ID_GREEN>;
+					};
+					led@9 {
+						color = <LED_COLOR_ID_BLUE>;
+					};
+				};
+			};
+		};
+	};
+};

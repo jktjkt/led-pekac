@@ -1,6 +1,8 @@
 import asyncio
+import asyncio_mqtt as am
 import evdev
 import smbus
+import socket
 
 wheel = None
 button = None
@@ -236,8 +238,74 @@ f_warm = open('/sys/class/pwm/pwmchip0/pwm1/duty_cycle', 'r+')
 brightness, color = from_pwm(int(f_cool.read()), int(f_warm.read()))
 update_pwm(*to_pwm(brightness, color))
 
+
+async def set_brighntess_from_mqtt(messages):
+    async for message in messages:
+        print(f'pekac: mqtt: brightness -> {message.payload}')
+        brightness = int(message.payload)
+        brightness = min(BRIGHTNESS_MAX, max(0, brightness))
+        update_pwm(*to_pwm(brightness, color))
+
+
+async def set_color_from_mqtt(messages):
+    async for message in messages:
+        print(f'pekac: mqtt: color -> {message.payload}')
+        color = int(message.payload)
+        color = min(COLOR_MAX, max(COLOR_MIN, color))
+        update_pwm(*to_pwm(brightness, color))
+
+
+async def cancel_tasks(tasks):
+    for task in tasks:
+        if task.done():
+            continue
+        task.cancel()
+        try:
+            await task
+        except asyncio.CancelledError:
+            pass
+
+
+async def do_mqtt(server):
+    my_hostname = socket.gethostname()
+    topic_status = f'pekac/{my_hostname}/status'
+    topic_set_brightness = f'pekac/{my_hostname}/set/brightness'
+    topic_set_color = f'pekac/{my_hostname}/set/color'
+    topic_brightness = f'pekac/{my_hostname}/brightness'
+    topic_color = f'pekac/{my_hostname}/color'
+
+    while True:
+        try:
+            async with AsyncExitStack() as stack:
+                tasks = set()
+                stack.push_async_callback(cancel_tasks, tasks)
+
+                will = am.Will(topic=topic_status, payload='offline', retain=True)
+                mqtt_client = am.Client(sys.argv[1], keepalive=3, client_id=f'pekac-{my_hostname}', will=will)
+                await stack.enter_async_context(mqtt_client)
+                print('pekac: connected to MQTT')
+
+                msgs_brightness = await stack.enter_async_context(mqtt_client.filtered_messages(topic_set_brightness))
+                tasks.add(asyncio.create_task(set_brighntess_from_mqtt(msgs_brightness), name='mqtt->brightness'))
+
+                msgs_color = await stack.enter_async_context(mqtt_client.filtered_messages(topic_set_color))
+                tasks.add(asyncio.create_task(set_color_from_mqtt(msgs_color), name='mqtt->color'))
+
+                for topic in (topic_set_brightness, topic_set_color):
+                    await mqtt_client.subscribe(topic)
+
+                await mqtt_client.publish(topic_status, 'connecting...', retain=True)
+                await asyncio.gather(*tasks)
+
+        except am.MqttError as e:
+            print(f'MQTT error: {e}')
+        finally:
+            await asyncio.sleep(1)
+
 for device in wheel, button:
     asyncio.ensure_future(handle_event(device))
+
+asyncio.ensure_future(do_mqtt)
 
 loop = asyncio.get_event_loop()
 loop.run_forever()
